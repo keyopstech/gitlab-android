@@ -18,7 +18,8 @@ RUN apt-get update && apt-get install -y \
 
 # Fetch the specified SDK tools version to build with
 RUN wget --quiet --output-document=/tmp/sdk-tools-linux.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip \
-    && unzip /tmp/sdk-tools-linux.zip -d ${ANDROID_HOME}
+    && unzip /tmp/sdk-tools-linux.zip -d ${ANDROID_HOME} \
+    && rm -rf /tmp/sdk-tools-linux.zip
 
 # Accept licence
 RUN mkdir ${ANDROID_HOME}/licenses \
