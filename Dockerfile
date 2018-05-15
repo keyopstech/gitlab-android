@@ -5,7 +5,7 @@ MAINTAINER Mickael VILLERS <mickael@keyops.tech>
 ENV PATH "$PATH:$PWD/.android/platform-tools/"
 ENV ANDROID_HOME "$PWD/.android"
 ENV ANDROID_COMPILE_SDK "26"
-ENV ANDROID_BUILD_TOOLS "26.0.2"
+ENV ANDROID_BUILD_TOOLS "27.0.3"
 ENV ANDROID_SDK_TOOLS "3859397"
 
 RUN apt-get update && apt-get install -y \
@@ -29,5 +29,5 @@ RUN mkdir ${ANDROID_HOME}/licenses \
 RUN ${ANDROID_HOME}/tools/bin/sdkmanager --update \
     && ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" "build-tools;${ANDROID_BUILD_TOOLS}" "extras;google;m2repository" "extras;android;m2repository"
 
-# Allow double wildcard for bash 
+# Allow double wildcard for bash
 RUN shopt -s globstar
