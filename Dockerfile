@@ -20,6 +20,8 @@ RUN apt-get update && apt-get install -y \
         unzip \
         lib32stdc++6 \
         lib32z1 \
+        ruby-full \
+        build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 # Fetch the specified SDK tools version to build with
@@ -34,3 +36,6 @@ RUN mkdir ${ANDROID_HOME}/licenses \
 # Install platform tools and Android SDK for the compile target
 RUN ${ANDROID_HOME}/tools/bin/sdkmanager --update \
     && ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" "build-tools;${ANDROID_BUILD_TOOLS}" "extras;google;m2repository" "extras;android;m2repository"
+
+# Install fastlane
+RUN gem install fastlane -NV
