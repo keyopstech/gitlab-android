@@ -2,14 +2,17 @@ FROM openjdk:8-jdk
 
 MAINTAINER Mickael VILLERS <mickael@keyops.tech>
 
+# Import bash config
+COPY .bash* root/
+
 ENV PATH "$PATH:$PWD/.android/platform-tools/"
 ENV ANDROID_HOME "$PWD/.android"
 ENV ANDROID_COMPILE_SDK "26"
 ENV ANDROID_BUILD_TOOLS "27.0.3"
 ENV ANDROID_SDK_TOOLS "3859397"
 
-# Allow double wildcard for bash
-RUN echo "shopt -s globstar" >> ~/.bashrc
+# Load bash config for non interactive bash
+ENV BASH_ENV "~/.bashrc"
 
 # Use bash
 SHELL ["/bin/bash", "-c"]
