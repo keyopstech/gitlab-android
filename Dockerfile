@@ -29,4 +29,5 @@ RUN mkdir ${ANDROID_HOME}/licenses \
 RUN ${ANDROID_HOME}/tools/bin/sdkmanager --update \
     && ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" "build-tools;${ANDROID_BUILD_TOOLS}" "extras;google;m2repository" "extras;android;m2repository"
 
+# Allow double wildcard for bash 
 RUN shopt -s globstar
