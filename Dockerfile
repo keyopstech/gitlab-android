@@ -8,6 +8,12 @@ ENV ANDROID_COMPILE_SDK "26"
 ENV ANDROID_BUILD_TOOLS "27.0.3"
 ENV ANDROID_SDK_TOOLS "3859397"
 
+# Allow double wildcard for bash
+RUN echo "shopt -s globstar" >> ~/.bashrc
+
+# Use bash
+SHELL ["/bin/bash", "-c"]
+
 RUN apt-get update && apt-get install -y \
         wget \
         tar \
@@ -28,6 +34,3 @@ RUN mkdir ${ANDROID_HOME}/licenses \
 # Install platform tools and Android SDK for the compile target
 RUN ${ANDROID_HOME}/tools/bin/sdkmanager --update \
     && ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" "build-tools;${ANDROID_BUILD_TOOLS}" "extras;google;m2repository" "extras;android;m2repository"
-
-# Allow double wildcard for bash
-RUN shopt -s globstar
