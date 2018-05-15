@@ -28,3 +28,5 @@ RUN mkdir ${ANDROID_HOME}/licenses \
 # Install platform tools and Android SDK for the compile target
 RUN ${ANDROID_HOME}/tools/bin/sdkmanager --update \
     && ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" "build-tools;${ANDROID_BUILD_TOOLS}" "extras;google;m2repository" "extras;android;m2repository"
+
+RUN shopt -s globstar
