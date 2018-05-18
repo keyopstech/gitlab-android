@@ -7,7 +7,7 @@ COPY .bash* root/
 
 ENV PATH "$PATH:$PWD/.android/platform-tools/"
 ENV ANDROID_HOME "$PWD/.android"
-ENV ANDROID_COMPILE_SDK "26"
+ENV ANDROID_COMPILE_SDK "27"
 ENV ANDROID_BUILD_TOOLS "27.0.3"
 ENV ANDROID_SDK_TOOLS "3859397"
 
@@ -17,7 +17,9 @@ ENV BASH_ENV "~/.bashrc"
 # Use bash
 SHELL ["/bin/bash", "-c"]
 
-RUN apt-get update && apt-get install -y \
+RUN apt update \
+    && apt upgrade -y \
+    && apt install -y \
         wget \
         tar \
         unzip \
@@ -25,6 +27,7 @@ RUN apt-get update && apt-get install -y \
         lib32z1 \
         ruby-full \
         build-essential \
+    && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
 # Fetch the specified SDK tools version to build with
