@@ -6,6 +6,7 @@ MAINTAINER Mickael VILLERS <mickael@keyops.tech>
 COPY .bash* root/
 
 ENV PATH "$PATH:$PWD/.android/platform-tools/"
+ENV PATH "$PATH:$PWD/.android/tools/bin"
 ENV ANDROID_HOME "$PWD/.android"
 ENV ANDROID_COMPILE_SDK "27"
 ENV ANDROID_BUILD_TOOLS "27.0.3"
@@ -42,6 +43,9 @@ RUN mkdir ${ANDROID_HOME}/licenses \
 # Install platform tools and Android SDK for the compile target
 RUN ${ANDROID_HOME}/tools/bin/sdkmanager --update \
     && ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" "build-tools;${ANDROID_BUILD_TOOLS}" "extras;google;m2repository" "extras;android;m2repository"
+
+# Install Android emulator
+RUN sdkmanager "system-images;android-${ANDROID_COMPILE_SDK};google_apis_playstore;x86" 
 
 # Install fastlane
 RUN gem install fastlane -NV
