@@ -52,3 +52,7 @@ RUN sdkmanager "system-images;android-25;google_apis;arm64-v8a"
 
 # Install fastlane
 RUN gem install fastlane -NV
+RUN gem install bundler -NV
+RUN gem install fastlane-plugin-automated_test_emulator_run -NV
+RUN gem install fastlane-plugin-get_android_version -NV
+RUN gem install json -NV
