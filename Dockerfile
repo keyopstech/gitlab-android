@@ -57,3 +57,4 @@ RUN gem install fastlane-plugin-automated_test_emulator_run -NV
 RUN gem install fastlane-plugin-get_android_version -NV
 RUN gem install json -NV
 RUN gem install retriable -NV
+RUN gem install atomos -NV
