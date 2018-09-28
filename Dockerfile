@@ -8,8 +8,8 @@ COPY .bash* root/
 ENV PATH "$PATH:$PWD/.android/platform-tools/"
 ENV PATH "$PATH:$PWD/.android/tools/bin"
 ENV ANDROID_HOME "$PWD/.android"
-ENV ANDROID_COMPILE_SDK "27"
-ENV ANDROID_BUILD_TOOLS "27.0.3"
+ENV ANDROID_COMPILE_SDK "28"
+ENV ANDROID_BUILD_TOOLS "28.0.2"
 ENV ANDROID_SDK_TOOLS "3859397"
 
 # Load bash config for non interactive bash
