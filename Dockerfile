@@ -51,10 +51,8 @@ RUN ${ANDROID_HOME}/tools/bin/sdkmanager --update \
 # RUN sdkmanager "system-images;android-25;google_apis;arm64-v8a"
 
 # Install fastlane
-RUN gem install fastlane -NV
 RUN gem install bundler -NV
-RUN gem install fastlane-plugin-automated_test_emulator_run -NV
-RUN gem install fastlane-plugin-get_android_version -NV
-RUN gem install json -NV
-RUN gem install retriable -NV
-RUN gem install atomos -NV
+COPY Gemfile fastlane/
+COPY Gemfile.lock fastlane/
+WORKDIR /fastlane
+RUN bundle install
