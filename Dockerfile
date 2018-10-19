@@ -31,6 +31,14 @@ RUN apt update \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
+RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz
+
+RUN mkdir -p /usr/local/gcloud \
+  && tar -C /usr/local/gcloud -xvf /tmp/google-cloud-sdk.tar.gz \
+  && /usr/local/gcloud/google-cloud-sdk/install.sh
+
+ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
+
 # Fetch the specified SDK tools version to build with
 RUN wget --quiet --output-document=/tmp/sdk-tools-linux.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip \
     && unzip /tmp/sdk-tools-linux.zip -d ${ANDROID_HOME} \
