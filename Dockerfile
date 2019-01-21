@@ -45,12 +45,17 @@ RUN wget --quiet --output-document=/tmp/sdk-tools-linux.zip https://dl.google.co
     && rm -rf /tmp/sdk-tools-linux.zip
 
 # Accept licence
-RUN mkdir ${ANDROID_HOME}/licenses \
-    && printf "8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb78af6dfcb131a6481e" > ${ANDROID_HOME}/licenses/android-sdk-license
+# RUN mkdir ${ANDROID_HOME}/licenses \
+#    && printf "8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb78af6dfcb131a6481e" > ${ANDROID_HOME}/licenses/android-sdk-license
+
+#RUN y | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
 
 # Install platform tools and Android SDK for the compile target
-RUN ${ANDROID_HOME}/tools/bin/sdkmanager --update \
-    && ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" "build-tools;${ANDROID_BUILD_TOOLS}" "extras;google;m2repository" "extras;android;m2repository"
+RUN ${ANDROID_HOME}/tools/bin/sdkmanager --update
+RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}"
+RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS}"
+RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager "extras;google;m2repository"
+RUN ${ANDROID_HOME}/tools/bin/sdkmanager "extras;android;m2repository"
 
 # Install fastlane
 RUN gem install bundler -NV
