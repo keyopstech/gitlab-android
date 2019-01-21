@@ -52,12 +52,6 @@ RUN mkdir ${ANDROID_HOME}/licenses \
 RUN ${ANDROID_HOME}/tools/bin/sdkmanager --update \
     && ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" "build-tools;${ANDROID_BUILD_TOOLS}" "extras;google;m2repository" "extras;android;m2repository"
 
-# Install Android emulator
-# RUN sdkmanager "system-images;android-${ANDROID_COMPILE_SDK};google_apis_playstore;x86"
-
-# Add back up emulator if kvm is not supported
-# RUN sdkmanager "system-images;android-25;google_apis;arm64-v8a"
-
 # Install fastlane
 RUN gem install bundler -NV
 COPY Gemfile fastlane/
