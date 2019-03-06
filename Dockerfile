@@ -60,6 +60,9 @@ RUN apt install -y \
 # Install bundler
 RUN gem install bundler -NV
 
+# Install zlib as required by some ruby gems
+RUN apt-get install zlib1g-dev
+
 ## Clean #######################################################################
 RUN apt clean
 RUN rm -rf /var/lib/apt/lists/*
