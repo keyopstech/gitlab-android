@@ -57,7 +57,7 @@ RUN apt install -y \
   ruby-full \
   build-essential
 
-# Install fastlane
+# Install bundler
 RUN gem install bundler -NV
 
 ## Clean #######################################################################
