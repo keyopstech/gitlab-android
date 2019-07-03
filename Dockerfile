@@ -31,7 +31,8 @@ ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
 ## Setup Android SDK ###########################################################
 RUN apt install -y \
   wget \
-  unzip
+  unzip \
+  libglu1
 
 # Setup env
 ENV PATH "$PATH:$PWD/.android/platform-tools/"
@@ -48,8 +49,14 @@ RUN wget --quiet --output-document=/tmp/sdk-tools-linux.zip https://dl.google.co
 RUN ${ANDROID_HOME}/tools/bin/sdkmanager --update
 RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}"
 RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS}"
+RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager "platform-tools"
+RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager "emulator"
 RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager "extras;google;m2repository"
-RUN ${ANDROID_HOME}/tools/bin/sdkmanager "extras;android;m2repository"
+RUN echo "no" | ${ANDROID_HOME}/tools/bin/sdkmanager "extras;android;m2repository"
+
+# Install avd image
+RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager "system-images;android-${ANDROID_COMPILE_SDK};default;x86"
+RUN echo "no" | ${ANDROID_HOME}/tools/bin/avdmanager create avd -n device -k "system-images;android-${ANDROID_COMPILE_SDK};default;x86"
 
 ## Setup Ruby/Bundler ##########################################################
 # Install ruby
@@ -66,3 +73,7 @@ RUN apt-get install zlib1g-dev
 ## Clean #######################################################################
 RUN apt clean
 RUN rm -rf /var/lib/apt/lists/*
+
+COPY entrypoint.sh /bin/entrypoint
+RUN chmod +x /bin/entrypoint
+ENTRYPOINT ["/bin/entrypoint"]
