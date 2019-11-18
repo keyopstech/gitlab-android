@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk
 
-MAINTAINER Vincent Brison <vincent.brison@keyops.tech>
+MAINTAINER Sylvain GIROD <sylvain@keyops.tech>
 
 ## Setup Bash ##################################################################
 # Import bash config
@@ -57,8 +57,13 @@ RUN apt install -y \
   ruby-full \
   build-essential
 
+# Install RVM to get ruby 2.6.3
+RUN gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+RUN curl -sSL https://get.rvm.io | bash -s stable --ruby
+ENV PATH "/usr/local/rvm/rubies/ruby-2.6.3/bin:${PATH}"
+
 # Install bundler
-RUN gem install bundler -NV
+RUN gem install bundler -NV -f
 
 # Install zlib as required by some ruby gems
 RUN apt-get install zlib1g-dev
