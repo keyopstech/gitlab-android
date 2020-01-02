@@ -68,6 +68,10 @@ RUN gem install bundler -NV -f
 # Install zlib as required by some ruby gems
 RUN apt-get install zlib1g-dev
 
+## Install Firebase-CLI #######################################################
+
+RUN curl -sL firebase.tools | bash
+
 ## Clean #######################################################################
 RUN apt clean
 RUN rm -rf /var/lib/apt/lists/*
