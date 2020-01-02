@@ -70,7 +70,8 @@ RUN apt-get install zlib1g-dev
 
 ## Install Firebase-CLI #######################################################
 
-RUN curl -sL firebase.tools | bash
+RUN curl -Lo /usr/local/bin/firebase https://firebase.tools/bin/linux/latest
+RUN chmod +rx /usr/local/bin/firebase
 
 ## Clean #######################################################################
 RUN apt clean
