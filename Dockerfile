@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk
 
-MAINTAINER Sylvain GIROD <sylvain@keyops.tech>
+LABEL maintainer="Sylvain GIROD <sylvain@keyops.tech>"
 
 ## Setup Bash ##################################################################
 # Import bash config
