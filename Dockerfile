@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk
 
-MAINTAINER Sylvain GIROD <sylvain@keyops.tech>
+LABEL maintainer="Sylvain GIROD <sylvain@keyops.tech>"
 
 ## Setup Bash ##################################################################
 # Import bash config
@@ -37,8 +37,6 @@ RUN apt install -y \
 ENV PATH "$PATH:$PWD/.android/platform-tools/"
 ENV PATH "$PATH:$PWD/.android/tools/bin"
 ENV ANDROID_HOME "$PWD/.android"
-ENV LEGACY_ANDROID_COMPILE_SDK "28"
-ENV LEGACY_ANDROID_BUILD_TOOLS "28.0.3"
 ENV ANDROID_COMPILE_SDK "29"
 ENV ANDROID_BUILD_TOOLS "29.0.3"
 
@@ -48,8 +46,6 @@ RUN wget --quiet --output-document=/tmp/sdk-tools-linux.zip https://dl.google.co
 
 # Install platform tools and Android SDK for the compile target
 RUN ${ANDROID_HOME}/tools/bin/sdkmanager --update
-RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-${LEGACY_ANDROID_COMPILE_SDK}"
-RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager "build-tools;${LEGACY_ANDROID_BUILD_TOOLS}"
 RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}"
 RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS}"
 RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager "extras;google;m2repository"
