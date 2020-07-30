@@ -59,8 +59,10 @@ RUN apt install -y \
 
 # Install RVM to get ruby 2.6.3
 RUN mkdir ~/.gnupg
-RUN echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf
-RUN gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+# RUN echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf
+# RUN gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+RUN curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
 RUN curl -sSL https://get.rvm.io | bash -s stable --ruby
 ENV PATH "/usr/local/rvm/rubies/ruby-2.6.3/bin:${PATH}"
 
