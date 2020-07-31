@@ -38,11 +38,9 @@ ENV PATH "$PATH:$PWD/.android/platform-tools/"
 ENV PATH "$PATH:$PWD/.android/tools/bin"
 ENV ANDROID_HOME "$PWD/.android"
 ENV ANDROID_COMPILE_SDK "29"
-ENV ANDROID_BUILD_TOOLS "29.0.3"
+ENV ANDROID_BUILD_TOOLS "29.0.2"
 
-RUN wget --quiet --output-document=/tmp/sdk-tools-linux.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip \
-    && unzip /tmp/sdk-tools-linux.zip -d ${ANDROID_HOME} \
-    && rm -rf /tmp/sdk-tools-linux.zip
+RUN wget --quiet --output-document=/tmp/sdk-tools-linux.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip && unzip /tmp/sdk-tools-linux.zip -d ${ANDROID_HOME} && rm -rf /tmp/sdk-tools-linux.zip
 
 # Install platform tools and Android SDK for the compile target
 RUN ${ANDROID_HOME}/tools/bin/sdkmanager --update
